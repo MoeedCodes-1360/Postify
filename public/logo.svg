@@ -1,0 +1,101 @@
+<svg
+  width="200"
+  height="200"
+  viewBox="0 0 200 200"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient
+      id="postifyGradient"
+      x1="25"
+      y1="20"
+      x2="175"
+      y2="180"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main chat bubble -->
+  <path
+    d="M45 20H155C169 20 180 31 180 45V135C180 149 169 160 155 160H125L100 180L75 160H45C31 160 20 149 20 135V45C20 31 31 20 45 20Z"
+    fill="url(#postifyGradient)"
+  />
+
+  <!-- Document -->
+  <path
+    d="M55 45C55 39.477 59.477 35 65 35H115L140 60V135C140 140.523 135.523 145 130 145H65C59.477 145 55 140.523 55 135V45Z"
+    fill="white"
+  />
+
+  <!-- Folded corner -->
+  <path
+    d="M115 35V55C115 58.314 117.686 61 121 61H140L115 35Z"
+    fill="#DDD6FE"
+  />
+
+  <!-- Text lines -->
+  <rect
+    x="72"
+    y="75"
+    width="42"
+    height="6"
+    rx="3"
+    fill="#8B5CF6"
+  />
+
+  <rect
+    x="72"
+    y="91"
+    width="52"
+    height="6"
+    rx="3"
+    fill="#A78BFA"
+  />
+
+  <rect
+    x="72"
+    y="107"
+    width="34"
+    height="6"
+    rx="3"
+    fill="#C4B5FD"
+  />
+
+  <!-- Quill -->
+  <path
+    d="M93 137C99 124 108 108 121 95C133 83 145 78 155 77C156 88 151 101 141 112C130 124 113 132 93 137Z"
+    fill="#4F46E5"
+  />
+
+  <!-- Quill feather details -->
+  <path
+    d="M96 135C108 123 121 110 139 94"
+    stroke="white"
+    stroke-width="4"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M113 118L108 105"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M126 106L121 94"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <!-- Quill tip -->
+  <path
+    d="M93 137L88 148L99 139L93 137Z"
+    fill="#312E81"
+  />
+</svg>
