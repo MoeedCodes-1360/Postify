@@ -9,16 +9,20 @@ const PostForm = ({post }) => {
     const {register,handleSubmit,watch,setValue,control,getValues}=useForm({
         defaultValues:{
             title: post?.title || '',
-            slug:post?.slug || "",
+            slug:post?.$id || "",
             content:post?.content || '',
-            status:post?.status || 'active'
+            status:post?.status || 'active',
+
         }
     })
     const navigate=useNavigate()
-    const userData=useSelector(state=>state.user.userData)
+    const userData=useSelector(state=>state.auth.userdata)
     const submit=async (data)=>{
+        
         if(post){
            const file=  data.image[0] ? await appWriteService.uploadFile(data)   : null
+           console.log("Post:", file)
+console.log("FeaturedImage:", file?.FeaturedImage)
             if(file){
                 appWriteService.deleteFile(post.featuredImg)
             }
@@ -35,11 +39,18 @@ const PostForm = ({post }) => {
         }
         else{
             const file=await appWriteService.uploadFile(data.image[0])
+            
             if (file){
                 const fileId=file.$id
                 data.featuredImg=fileId
+                
+                // console.log("redux User:", userData?.$id)
+                // console.log("redux User:", userData)
+                // console.log(userData.userData.$id);
+                
+                
               const dbPost=  await appWriteService.createPost({...data,
-                    userId:userData.$id
+                    userid:userData.userData.$id
                     
                 })
                 if(dbPost){
@@ -54,9 +65,10 @@ const PostForm = ({post }) => {
             return value.trim()
             .toLowerCase()
             .replace(/^[a-zA-Z\d\s]+/g,'-')
-            .replace(/^/s/g,'-')
-         return ''   
-        }    },[])
+            .replace(/\s/g,'-')
+        }  
+    return ''  },[])
+           
         React.useEffect(()=>{
                 const subscription=watch((value,{name})=>{
                     if (name==='title'){

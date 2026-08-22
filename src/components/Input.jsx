@@ -25,6 +25,7 @@ const Input = React.forwardRef(function Input({
             ${className}`
         }
         ref={ref}
+        {...props}
         id={id} />
       
     </div>

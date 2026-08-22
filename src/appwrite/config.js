@@ -1,4 +1,4 @@
-import conf from "../conf/config";
+import conf from "../conf/conf";
 import  { Client, ID, Databases, Storage, Query} from "appwrite";
 
 export  class Service{
@@ -14,24 +14,27 @@ export  class Service{
         this.bucket=new Storage(this.client)
     
     }
-    async createPost({title, slug,content,featuredImg,status,userId}){
+    async createPost({title, content,featuredImg,status,userid}){
 
         try {
             return await this.databases.createDocument({
                databaseId: conf.appwriteDatabaseId,
                collectionId: conf.appwriteCollectionId,
-               documentId: slug,
+               documentId: ID.unique(),
                data:{
-                title,
+                Title:title,
        
-                content,
-                featuredImg,
-                status,
-                userId
+                Content:content,
+                FeaturedImage:featuredImg,
+                Status:status,
+               userid:userid
                },
             })
         } catch (error) {
             console.log("Appwrite Service Err:CreatePost:",error)
+            console.log(userid)
+            console.log(content)
+            console.log(title)
             return false
             
         }
@@ -99,7 +102,7 @@ export  class Service{
             
         }
     }
-    async getPosts(queries=[Query.equal("status","active")]){
+    async getPosts(queries=[Query.equal("Status","active")]){
         try {
             return await this.databases.listDocuments({
                 databaseId: conf.appwriteDatabaseId,
@@ -148,8 +151,10 @@ export  class Service{
             
         }
     }
-    getFilePreview(fileid){
-        return this.bucket.getFilePreview({
+    getFileView(fileid){
+    //      console.log("🔥 getFilePreview called");
+    // console.log("🔥 fileId:", fileid);
+        return this.bucket.getFileView({
              bucketId:conf.appwriteBucketId,
                     fileId: fileid,
         })

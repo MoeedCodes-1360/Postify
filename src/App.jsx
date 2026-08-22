@@ -41,7 +41,7 @@ function App() {
       <Headers />
 
     <main>
-     Todo: <Outlet />
+     <Outlet />
     </main>
       <Footer />
     </div>

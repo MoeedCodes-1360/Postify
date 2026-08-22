@@ -1,12 +1,14 @@
 import React from 'react'
-import {Container, Logo,Logoutbtn} from "../index"
+import {Container, Logo,Logoutbtn,Button} from "../index"
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import logo from "../../../public/logo.svg"
+
 
 function Headers() {
   const authStatus= useSelector((state)=>{
-    state.auth.status
+   return state.auth.status
 
   })
   const navigate=useNavigate()
@@ -41,9 +43,11 @@ function Headers() {
     <div className='py-3 shadow bg-gray-500'>
       <Container>
         <nav className='flex'>
-          <div>
-            <Link to="/" />
-            <Logo width="70px" />
+          <div className='flex flex-row'>
+            <Link to="/" >
+             <img src={logo} width={45} height={45}   />
+            </Link>
+             <h1 className='text-3xl font-bold italic font '>Postify</h1>
           </div>
           <ul className='flex ml-auto'>
             {navItems.map((item)=>
@@ -59,7 +63,7 @@ function Headers() {
             ) : null
             )}
             {authStatus && (
-              <li className='inline-block px-6 py-2 duration-200 hovering:bg-blue-100 rounded-full'>Logout</li>
+              <li className='inline-block px-6 py-2 duration-200 hovering:bg-blue-100 rounded-full'><Logoutbtn /></li>
             )}
           </ul>
         </nav>
