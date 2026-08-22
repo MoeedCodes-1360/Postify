@@ -55,6 +55,15 @@ const router=createBrowserRouter([
         path:'/post/:slug',
         element:<Post />
       },
+      {
+        path:'/edit-post/:slug',
+        element:(
+          <Authlayout authentication>
+            <EditPost />
+          </Authlayout>
+        )
+
+      }
 
     ]
   }

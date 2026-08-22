@@ -46,17 +46,18 @@ export  class Service{
                collectionId: conf.appwriteCollectionId,
                documentId: slug,
                data:{
-                title,
+               Title: title,
        
-                content,
-                featuredImg,
-                status,
+                Content:content,
+               FeaturedImage: featuredImg,
+               Status: status,
                 
                }
             })
             
         } catch (error) {
             console.log("service error(updateDoc): ",error)
+            return false
             
         }
 
@@ -87,6 +88,8 @@ export  class Service{
     }
     async getPost(slug){
         try {
+            console.log(slug);
+            
             return await this.databases.getDocument({
 
                 databaseId: conf.appwriteDatabaseId,
@@ -121,11 +124,11 @@ export  class Service{
     }
     async uploadFile(file){
         try {
-            return await this.bucket.createFile({
-                bucketId:conf.appwriteBucketId,
-                fileId:ID.unique(),
-                file:file
-            })
+            return await this.bucket.createFile(
+            conf.appwriteBucketId,
+              ID.unique(),
+            file
+            )
             
         } catch (error) {
             console.log("Service error (uploadFiles): ",error," fu");

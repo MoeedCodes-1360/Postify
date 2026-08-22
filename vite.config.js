@@ -5,4 +5,11 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(),tailwindcss()],
+  test: {
+    environment: 'jsdom',
+    setupFiles: './tests/setup.js',
+    pool: 'threads',
+    maxWorkers: 1,
+    minWorkers: 1,
+  },
 })

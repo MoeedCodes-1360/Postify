@@ -8,33 +8,43 @@ import { useSelector } from 'react-redux'
 const PostForm = ({post }) => {
     const {register,handleSubmit,watch,setValue,control,getValues}=useForm({
         defaultValues:{
-            title: post?.title || '',
+            title: post?.Title || '',
             slug:post?.$id || "",
-            content:post?.content || '',
-            status:post?.status || 'active',
+            content:post?.Content || '',
+            status:post?.Status || 'active',
 
         }
     })
     const navigate=useNavigate()
     const userData=useSelector(state=>state.auth.userdata)
     const submit=async (data)=>{
+        console.log(data.FeaturedImage)
         
         if(post){
-           const file=  data.image[0] ? await appWriteService.uploadFile(data)   : null
-           console.log("Post:", file)
-console.log("FeaturedImage:", file?.FeaturedImage)
-            if(file){
-                appWriteService.deleteFile(post.featuredImg)
-            }
-            const dbPost=appWriteService.updatePost(post.$id,{
+            // console.log("Old image:", post.FeaturedImage)
+            console.log("FORM DATA:", data)
+console.log("IMAGE FIELD:", data.image)
+console.log("FIRST IMAGE:", data.image?.[0])
+
+         const file = data.image?.[0]
+             ? await appWriteService.uploadFile(data.image[0])
+             : null
+//            console.log("Post:", file)
+// console.log("FeaturedImage:", file?.FeaturedImage)
+            const dbPost=await appWriteService.updatePost(post.$id,{
                 ...data,
-                featuredImg:file ? file.$id : post.featuredImage,
+                featuredImg:file ? file.$id : post.FeaturedImage,
                 
                 
             })
             if(dbPost){
+                    if (file) {
+                    await appWriteService.deleteFile(post.FeaturedImage)
+                    }
                     navigate(`/post/${dbPost.$id}`)
 
+                } else if (file) {
+                    await appWriteService.deleteFile(file.$id)
                 }
         }
         else{
@@ -111,7 +121,7 @@ console.log("FeaturedImage:", file?.FeaturedImage)
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={appWriteService.getFileView(post.FeaturedImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />

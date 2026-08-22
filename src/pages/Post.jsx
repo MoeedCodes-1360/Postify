@@ -18,6 +18,8 @@ export default function Post() {
   useEffect(() => {
     if (slug) {
       appwriteService.getPost(slug).then((post) => {
+            console.log("POST FROM APPWRITE:", post);
+
         if (post){
           console.log("featured image",post.FeaturedImage)
           setPost(post);
