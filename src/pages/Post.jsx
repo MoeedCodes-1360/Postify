@@ -18,7 +18,7 @@ export default function Post() {
   useEffect(() => {
     if (slug) {
       appwriteService.getPost(slug).then((post) => {
-            console.log("POST FROM APPWRITE:", post);
+            
 
         if (post){
           console.log("featured image",post.FeaturedImage)
@@ -44,9 +44,7 @@ export default function Post() {
     <div className="py-8">
       <Container>
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-  {        console.log(
-    appwriteService.getFileView(post.FeaturedImage)
-)}
+  
           <img
             src={appwriteService.getFileView(post.FeaturedImage)}
             alt={post.Title}
