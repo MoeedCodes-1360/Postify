@@ -13,6 +13,7 @@ const RTE = ({ name, control, label, defaultValue = "" }) => {
         render={({ field: { onChange } }) => {
           return <Editor
             apiKey={conf.tinyMCEApiKey}
+                   {console.log(apiKey)}
             initialValue={defaultValue}
             init={{
               height: 500,
